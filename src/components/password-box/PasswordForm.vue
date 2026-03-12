@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import DynInput from '../inputs/DynInput.vue';
 import { usePasswordValidation } from '@/composables/password/usePasswordValidation';
-
+import { usePasswordChange } from '@/composables/password/usePasswordChange';
 import type { PasswordForm } from '@/types/password/passwordForm';
 
 const form = reactive<PasswordForm>({
@@ -12,12 +12,28 @@ const form = reactive<PasswordForm>({
 });
 
 const { errors, isValid } = usePasswordValidation(form);
+const { submitPassword, loading } = usePasswordChange();
 
-const handleSubmit = (): void => {
+async function handleSubmit(): Promise<void> {
     if (!isValid.value) return;
 
-    console.log(form);
-};
+    const result = await submitPassword({
+        currentPassword: form.currentPassword,
+        newPassword: form.newPassword,
+    });
+
+    if (result.success) {
+        // Show toaster success and go back to initial view
+        console.log('Password Changed succesfully');
+
+        form.currentPassword = '';
+        form.newPassword = '';
+        form.confirmPassword = '';
+    } else {
+        // show toaster error
+        console.log('Error changing password');
+    }
+}
 </script>
 
 <template>
@@ -72,13 +88,16 @@ const handleSubmit = (): void => {
         </div>
 
         <div class="flex gap-3">
-            <button type="button" class="border rounded px-4 py-2 text-sm">
+            <button
+                type="button"
+                class="border rounded px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+            >
                 ABBRECHEN
             </button>
             <button
                 type="submit"
-                class="border rounded px-4 py-2 text-sm"
-                :disabled="!isValid"
+                :disabled="!isValid || loading"
+                class="border rounded px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
             >
                 ÄNDERUNGEN SPEICHERN
             </button>

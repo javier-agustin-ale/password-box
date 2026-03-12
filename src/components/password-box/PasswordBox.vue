@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import PasswordForm from './PasswordForm.vue';
 
 const showPasswordForm = ref(false);
 </script>

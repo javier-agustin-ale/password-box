@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -21,20 +21,55 @@ export default {
                     'xxx-45': '#1f4873',
                     'xxx-56': '#54718e',
                 },
+
                 green: {
                     success: '#62ff98',
                 },
+
                 red: {
                     alert: '#ff6262',
                 },
+
+                baz: '#0d6771',
+
+                card: {
+                    active: 'rgba(255, 255, 255, 0.24)',
+                    default: 'rgba(255, 255, 255, 0.16)',
+                    inactive: 'rgba(0, 0, 0, 0.32)',
+                },
+
                 gray: 'rgba(255, 255, 255, 0.5)',
+                'gray-40': '#666666',
+                'gray-60': '#999999',
+                'gray-73': '#99aabb',
+                'gray-80': '#cccccc',
+                'gray-88': '#c1d1e1',
                 'gray-90': '#e6e6e6',
+
+                orange: '#df984b',
+                yellow: '#e6d223',
                 white: '#ffffff',
             },
 
-            fontFamily: {
-                sans: ['Titillium Web', ...defaultTheme.fontFamily.sans],
+            screens: {
+                xl: '1440px',
+                '2xl': '1536px',
+                '3xl': '1920px',
+                '4xl': '2880px',
+                '5xl': '3840px',
             },
+        },
+
+        fontFamily: {
+            bebas: ['Bebas Neue', ...defaultTheme.fontFamily.sans],
+            oswald: ['Oswald', ...defaultTheme.fontFamily.sans],
+            sans: ['Titillium Web', ...defaultTheme.fontFamily.sans],
+            condensed: ['Roboto Condensed', ...defaultTheme.fontFamily.sans],
+        },
+
+        fontSize: {
+            ...defaultTheme.fontSize,
+            xxs: '0.625rem',
         },
     },
 };

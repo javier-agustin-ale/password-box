@@ -26,7 +26,13 @@ async function handleSubmit(): Promise<void> {
     });
 
     if (result.success) {
-        toaster.show('Password changed successfully', 'success');
+        toaster.show(
+            'Wir haben dir eine E-Mail zum Zurücksetzen deines Passwortes geschickt.',
+            'success',
+            'Code versendet!',
+            5000,
+        );
+
         console.log('Password Changed succesfully');
 
         form.currentPassword = '';

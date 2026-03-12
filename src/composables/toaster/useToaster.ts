@@ -4,7 +4,12 @@ import { ref } from 'vue';
 const toasts = ref<Toast[]>([]);
 
 export function useToaster() {
-    function show(message: string, type: 'success' | 'error', duration = 3000) {
+    function show(
+        message: string,
+        type: 'success' | 'error',
+        title?: string,
+        duration = 3000,
+    ) {
         const id = new Date().toISOString();
 
         toasts.value.push({
@@ -12,6 +17,7 @@ export function useToaster() {
             message,
             type,
             duration,
+            title,
         });
 
         setTimeout(() => {

@@ -1,21 +1,36 @@
 <script setup lang="ts">
 import { useToaster } from '@/composables/toaster/useToaster';
+import Mailing from '@/assets/svg-assets/mailing.svg';
 
 const { toasts } = useToaster();
 </script>
 
 <template>
-    <div class="fixed top-6 right-6 space-y-2">
+    <div
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4"
+    >
         <div
             v-for="toast in toasts"
             :key="toast.id"
-            class="px-4 py-2 rounded text-white shadow"
-            :class="
-                toast.type === 'success' ? 'bg-green-success' : 'bg-red-alert'
-            "
+            class="flex items-center gap-4 rounded-xl bg-blue-xxx-24 px-6 py-5 shadow-lg border border-card-default"
         >
-            {{ toast.message }}
+            <div v-if="toast.type === 'success'">
+                <img
+                    :src="Mailing"
+                    alt="mail icon"
+                    class="w-8 h-8 shrink-0 text-white"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <p class="text-lg font-semibold text-white">
+                    {{ toast.title || 'Error' }}
+                </p>
+
+                <p class="text-sm text-gray text-white">
+                    {{ toast.message }}
+                </p>
+            </div>
         </div>
     </div>
 </template>
-<style scoped></style>

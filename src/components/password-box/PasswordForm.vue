@@ -51,8 +51,13 @@ const returnToInitialView = () => {
 </script>
 
 <template>
+    <h1 class="text-white font-bold">PASSWORT ÄNDERN</h1>
+    <p class="text-gray-60">
+        Vorgaben: mind. 12 Zeichen, 1 Zahl, 1 Sonderzeichen, 1 Großbuchstabe, 1
+        Kleinbuchstabe
+    </p>
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-        <div class="flex items-end gap-4">
+        <div class="flex items-end gap-4 py-5">
             <div class="flex flex-col gap-1 flex-1">
                 <DynInput
                     v-model="form.currentPassword"
@@ -66,12 +71,15 @@ const returnToInitialView = () => {
                     {{ errors.currentPassword }}
                 </p>
             </div>
-            <button type="button" class="pb-2 text-sm whitespace-nowrap">
+            <button
+                type="button"
+                class="pb-2 text-white text-sm whitespace-nowrap"
+            >
                 Forgot password?
             </button>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 pb-8">
             <div class="flex flex-col gap-1">
                 <DynInput
                     v-model="form.newPassword"
@@ -105,14 +113,14 @@ const returnToInitialView = () => {
             <button
                 @click="returnToInitialView()"
                 type="button"
-                class="border rounded px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+                class="border border-blue-active text-blue-active rounded px-4 py-2 text-sm cursor-pointer hover:bg-blue-xxx-45"
             >
                 ABBRECHEN
             </button>
             <button
                 type="submit"
                 :disabled="!isValid || loading"
-                class="border rounded px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+                class="bg-blue-active border rounded px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 enabled:hover:bg-blue-highlight enabled:cursor-pointer"
             >
                 ÄNDERUNGEN SPEICHERN
             </button>

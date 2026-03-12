@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import DynInput from '../inputs/DynInput.vue';
+import { usePasswordValidation } from '@/composables/password/usePasswordValidation';
 
 import type { PasswordForm } from '@/types/password/passwordForm';
 
@@ -10,7 +11,11 @@ const form = reactive<PasswordForm>({
     confirmPassword: '',
 });
 
+const { errors, isValid } = usePasswordValidation(form);
+
 const handleSubmit = (): void => {
+    if (!isValid.value) return;
+
     console.log(form);
 };
 </script>
@@ -25,7 +30,11 @@ const handleSubmit = (): void => {
                     label="Current Password"
                     type="password"
                     placeholder="Current Password"
+                    :invalid="!!errors.currentPassword"
                 />
+                <p v-if="errors.currentPassword" class="text-red-alert text-xs">
+                    {{ errors.currentPassword }}
+                </p>
             </div>
             <button type="button" class="pb-2 text-sm whitespace-nowrap">
                 Forgot password?
@@ -40,7 +49,11 @@ const handleSubmit = (): void => {
                     :label="'New Password'"
                     type="password"
                     placeholder="New Password"
+                    :invalid="!!errors.newPassword"
                 ></DynInput>
+                <p v-if="errors.newPassword" class="text-red-alert text-xs">
+                    {{ errors.newPassword }}
+                </p>
             </div>
 
             <div class="flex flex-col gap-1">
@@ -50,7 +63,11 @@ const handleSubmit = (): void => {
                     :label="'Confirm Password'"
                     type="password"
                     placeholder="Confirm Password"
+                    :invalid="!!errors.confirmPassword"
                 ></DynInput>
+                <p v-if="errors.confirmPassword" class="text-red-alert text-xs">
+                    {{ errors.confirmPassword }}
+                </p>
             </div>
         </div>
 
@@ -58,7 +75,11 @@ const handleSubmit = (): void => {
             <button type="button" class="border rounded px-4 py-2 text-sm">
                 ABBRECHEN
             </button>
-            <button type="submit" class="border rounded px-4 py-2 text-sm">
+            <button
+                type="submit"
+                class="border rounded px-4 py-2 text-sm"
+                :disabled="!isValid"
+            >
                 ÄNDERUNGEN SPEICHERN
             </button>
         </div>

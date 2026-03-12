@@ -4,6 +4,7 @@ import DynInput from '../inputs/DynInput.vue';
 import { usePasswordValidation } from '@/composables/password/usePasswordValidation';
 import { usePasswordChange } from '@/composables/password/usePasswordChange';
 import type { PasswordForm } from '@/types/password/passwordForm';
+import { useToaster } from '@/composables/toaster/useToaster';
 
 const form = reactive<PasswordForm>({
     currentPassword: '',
@@ -14,6 +15,7 @@ const form = reactive<PasswordForm>({
 const { errors, isValid } = usePasswordValidation(form);
 const { submitPassword, loading } = usePasswordChange();
 const emit = defineEmits(['returnToInitialView']);
+const toaster = useToaster();
 
 async function handleSubmit(): Promise<void> {
     if (!isValid.value) return;
@@ -24,7 +26,7 @@ async function handleSubmit(): Promise<void> {
     });
 
     if (result.success) {
-        // Show toaster success and go back to initial view
+        toaster.show('Password changed successfully', 'success');
         console.log('Password Changed succesfully');
 
         form.currentPassword = '';
@@ -32,7 +34,7 @@ async function handleSubmit(): Promise<void> {
         form.confirmPassword = '';
         returnToInitialView();
     } else {
-        // show toaster error
+        toaster.show('Error changing password', 'error');
         console.log('Error changing password');
     }
 }

@@ -11,7 +11,7 @@ const showPasswordForm = ref(false);
             <h2 class="text-xl font-semibold mb-6 text-white">PASSWORT</h2>
             <button
                 @click="showPasswordForm = !showPasswordForm"
-                class="cursor-pointer text-white"
+                class="border border-blue-active text-blue-active rounded px-4 py-2 text-sm cursor-pointer hover:bg-blue-xxx-45"
             >
                 Ändern
             </button>

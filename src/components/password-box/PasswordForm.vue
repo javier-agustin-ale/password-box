@@ -182,9 +182,32 @@ const returnToInitialView = () => {
             <button
                 type="submit"
                 :disabled="!isValid || loading"
-                class="bg-blue-active border rounded px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 enabled:hover:bg-blue-highlight enabled:cursor-pointer"
+                class="flex items-center justify-center gap-2 border rounded px-4 py-2 text-sm bg-blue-active text-white disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:bg-blue-highlight enabled:cursor-pointer"
             >
-                ÄNDERUNGEN SPEICHERN
+                <svg
+                    v-if="loading"
+                    class="w-4 h-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                    />
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                </svg>
+
+                <span>
+                    {{ loading ? 'Speichern...' : 'ÄNDERUNGEN SPEICHERN' }}
+                </span>
             </button>
         </div>
     </form>

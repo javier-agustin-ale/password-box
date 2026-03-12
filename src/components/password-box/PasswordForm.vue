@@ -1,15 +1,22 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import DynInput from '../inputs/DynInput.vue';
 import { usePasswordValidation } from '@/composables/password/usePasswordValidation';
 import { usePasswordChange } from '@/composables/password/usePasswordChange';
 import type { PasswordForm } from '@/types/password/passwordForm';
 import { useToaster } from '@/composables/toaster/useToaster';
+import EyeIcon from '@/assets/svg-assets/eye.svg?component';
+import EyeClosedIcon from '@/assets/svg-assets/eye-closed.svg?component';
 
 const form = reactive<PasswordForm>({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
+});
+const showPassword = reactive({
+    current: false,
+    new: false,
+    confirm: false,
 });
 
 const { errors, isValid } = usePasswordValidation(form);
@@ -51,29 +58,48 @@ const returnToInitialView = () => {
 </script>
 
 <template>
-    <h1 class="text-white font-bold">PASSWORT ÄNDERN</h1>
-    <p class="text-gray-60">
+    <h1 class="text-white text-2xl font-bold">PASSWORT ÄNDERN</h1>
+    <p class="text-gray-60 text-sm">
         Vorgaben: mind. 12 Zeichen, 1 Zahl, 1 Sonderzeichen, 1 Großbuchstabe, 1
         Kleinbuchstabe
     </p>
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-        <div class="flex items-end gap-4 py-5">
+        <div class="flex items-center gap-4 py-5">
             <div class="flex flex-col gap-1 flex-1">
                 <DynInput
                     v-model="form.currentPassword"
                     name="currentPassword"
                     label="Current Password"
-                    type="password"
+                    :type="showPassword.current ? 'text' : 'password'"
                     placeholder="Current Password"
                     :invalid="!!errors.currentPassword"
-                />
+                >
+                    <template #append>
+                        <button
+                            type="button"
+                            class="text-white flex items-center justify-center w-full h-full"
+                            @click="
+                                showPassword.current = !showPassword.current
+                            "
+                        >
+                            <EyeIcon
+                                v-if="!showPassword.current"
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                            <EyeClosedIcon
+                                v-else
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                        </button>
+                    </template>
+                </DynInput>
                 <p v-if="errors.currentPassword" class="text-red-alert text-xs">
                     {{ errors.currentPassword }}
                 </p>
             </div>
             <button
                 type="button"
-                class="pb-2 text-white text-sm whitespace-nowrap"
+                class="text-blue-active text-sm whitespace-nowrap"
             >
                 Forgot password?
             </button>
@@ -85,10 +111,27 @@ const returnToInitialView = () => {
                     v-model="form.newPassword"
                     name="newPassword"
                     :label="'New Password'"
-                    type="password"
+                    :type="showPassword.new ? 'text' : 'password'"
                     placeholder="New Password"
                     :invalid="!!errors.newPassword"
-                ></DynInput>
+                >
+                    <template #append>
+                        <button
+                            type="button"
+                            class="text-white flex items-center justify-center w-full h-full"
+                            @click="showPassword.new = !showPassword.new"
+                        >
+                            <EyeIcon
+                                v-if="!showPassword.new"
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                            <EyeClosedIcon
+                                v-else
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                        </button>
+                    </template>
+                </DynInput>
                 <p v-if="errors.newPassword" class="text-red-alert text-xs">
                     {{ errors.newPassword }}
                 </p>
@@ -99,10 +142,29 @@ const returnToInitialView = () => {
                     v-model="form.confirmPassword"
                     name="confirmPassword"
                     :label="'Confirm Password'"
-                    type="password"
+                    :type="showPassword.confirm ? 'text' : 'password'"
                     placeholder="Confirm Password"
                     :invalid="!!errors.confirmPassword"
-                ></DynInput>
+                >
+                    <template #append>
+                        <button
+                            type="button"
+                            class="text-white flex items-center justify-center w-full h-full"
+                            @click="
+                                showPassword.confirm = !showPassword.confirm
+                            "
+                        >
+                            <EyeIcon
+                                v-if="!showPassword.confirm"
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                            <EyeClosedIcon
+                                v-else
+                                class="w-4 h-4 text-white fill-current"
+                            />
+                        </button>
+                    </template>
+                </DynInput>
                 <p v-if="errors.confirmPassword" class="text-red-alert text-xs">
                     {{ errors.confirmPassword }}
                 </p>

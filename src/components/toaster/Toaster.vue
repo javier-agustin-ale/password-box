@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useToaster } from '@/composables/toaster/useToaster';
-import Mailing from '@/assets/svg-assets/mailing.svg';
+import MailingIcon from '@/assets/svg-assets/mailing.svg?component';
 
 const { toasts } = useToaster();
 </script>
@@ -15,11 +15,7 @@ const { toasts } = useToaster();
             class="flex items-center gap-4 rounded-xl bg-blue-xxx-24 px-6 py-5 shadow-lg border border-card-default"
         >
             <div v-if="toast.type === 'success'">
-                <img
-                    :src="Mailing"
-                    alt="mail icon"
-                    class="w-8 h-8 shrink-0 text-white"
-                />
+                <MailingIcon class="w-8 h-8 shrink-0 text-white" />
             </div>
 
             <div class="flex flex-col">

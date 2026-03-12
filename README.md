@@ -1,48 +1,198 @@
-# password-box
+# Password Box
 
-This template should help get you started developing with Vue 3 in Vite.
+A small **Vue 3 + TypeScript** application that implements a password change form with validation, user feedback, and a simulated API interaction.
 
-## Recommended IDE Setup
+The project focuses on **clean architecture, composables, and reusable components**, following patterns commonly used in modern frontend applications.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Challenge Context
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+This project was developed as part of a frontend coding challenge.
 
-## Type Support for `.vue` Imports in TS
+The goal was to implement a password change interface with:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- proper validation rules
+- clear user feedback
+- a clean and maintainable architecture
+- reusable components
+- unit tests for core logic
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Tech Stack
 
-## Project Setup
+- Vue 3
+- TypeScript
+- Vite
+- TailwindCSS v4
+- Vitest (unit testing)
 
-```sh
+---
+
+## Features
+
+### Password Change Form
+
+The application provides a form to update a user password with the following validation rules:
+
+- Current password is required
+- New password must contain:
+  - Minimum **12 characters**
+  - At least **one number**
+  - At least **one special character**
+  - At least **one uppercase letter**
+  - At least **one lowercase letter**
+- Confirmation password must match the new password
+
+Validation errors appear **only after the user interacts with the input field**, improving the user experience.
+
+---
+
+### Password Visibility Toggle
+
+Each password input includes a toggle icon that allows the user to switch between:
+
+```
+password → visible text
+```
+
+This functionality is implemented using the reusable `DynInput` component and its `append` slot.
+
+---
+
+### Loading State
+
+When submitting the form:
+
+- The **Save button displays a loading spinner**
+- The button becomes **disabled**
+- Prevents duplicate submissions
+
+---
+
+### Toast Notifications
+
+A small toast notification system provides feedback after submitting the form.
+
+Examples:
+
+- Success notification when the password is updated
+- Error notification when the request fails
+
+---
+
+### Simulated API Call
+
+The password change action calls a **fake API service** that simulates a network request.
+
+This allows the UI to behave as if it were communicating with a real backend.
+
+---
+
+### Event Tracking
+
+A small tracking utility logs important user events such as:
+
+- password change submit
+- successful password change
+- failed request
+
+This demonstrates how analytics events could be integrated in a real application.
+
+---
+
+### Unit Tests
+
+Unit tests were written using **Vitest** for the main composables:
+
+- `usePasswordValidation`
+- `usePasswordChange`
+
+These tests validate the business logic of the application.
+
+---
+
+## Project Structure
+
+```
+src
+ ├ assets
+ │   
+ │
+ ├ components
+ │   ├ inputs
+ │   │   └ DynInput.vue
+ │   │
+ │   ├ toaster
+ │   │   └ Toaster.vue
+ │   │
+ │   └ password-box
+ │      
+ │          
+ │
+ ├ composables
+ │
+ │
+ ├ services
+ │   ├ passwordService.ts
+ │   └ analyticsService.ts
+ │
+ ├ types
+ │   └ password
+ │       ├ password.ts
+ │       └ passwordForm.ts
+ │
+ 
+```
+
+---
+
+## Installation
+
+Install dependencies:
+
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
+## Run the Development Server
+
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+---
 
-```sh
-npm run build
+## Run Unit Tests
+
+```
+npm run test
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+---
 
-```sh
-npm run test:unit
-```
+## Architecture Notes
+
+The project separates responsibilities into clear layers:
+
+| Layer | Responsibility |
+|------|------|
+| Components | UI rendering |
+| Composables | Business logic |
+| Services | API interaction |
+| Types | Type safety |
+| Utilities | Shared functionality |
+
+This structure keeps components **lightweight and focused on UI**, while logic remains reusable and testable.
+
+---
+
+## Author
+
+**Javier Agustin Ale**
+
+GitHub  
+https://github.com/javier-agustin-ale/password-box

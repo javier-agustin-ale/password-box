@@ -13,6 +13,7 @@ const form = reactive<PasswordForm>({
 
 const { errors, isValid } = usePasswordValidation(form);
 const { submitPassword, loading } = usePasswordChange();
+const emit = defineEmits(['returnToInitialView']);
 
 async function handleSubmit(): Promise<void> {
     if (!isValid.value) return;
@@ -29,11 +30,16 @@ async function handleSubmit(): Promise<void> {
         form.currentPassword = '';
         form.newPassword = '';
         form.confirmPassword = '';
+        returnToInitialView();
     } else {
         // show toaster error
         console.log('Error changing password');
     }
 }
+
+const returnToInitialView = () => {
+    emit('returnToInitialView');
+};
 </script>
 
 <template>
@@ -89,6 +95,7 @@ async function handleSubmit(): Promise<void> {
 
         <div class="flex gap-3">
             <button
+                @click="returnToInitialView()"
                 type="button"
                 class="border rounded px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
             >

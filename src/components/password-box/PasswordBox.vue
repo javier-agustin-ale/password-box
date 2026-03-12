@@ -9,12 +9,18 @@ const showPasswordForm = ref(false);
     <div class="bg-white p-8 rounded-xl shadow w-full max-w-md">
         <div v-if="!showPasswordForm">
             <h2 class="text-xl font-semibold mb-6">PASSWORT</h2>
-            <button @click="showPasswordForm = !showPasswordForm">
+            <button
+                @click="showPasswordForm = !showPasswordForm"
+                class="cursor-pointer"
+            >
                 Ändern
             </button>
         </div>
 
-        <PasswordForm v-if="showPasswordForm" />
+        <PasswordForm
+            v-if="showPasswordForm"
+            @return-to-initial-view="showPasswordForm = false"
+        />
     </div>
 </template>
 <style scoped></style>

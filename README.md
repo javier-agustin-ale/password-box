@@ -116,33 +116,18 @@ These tests validate the business logic of the application.
 ## Project Structure
 
 ```
-src
- ├ assets
- │   
- │
- ├ components
- │   ├ inputs
- │   │   └ DynInput.vue
- │   │
- │   ├ toaster
- │   │   └ Toaster.vue
- │   │
- │   └ password-box
- │      
- │          
- │
- ├ composables
- │
- │
- ├ services
- │   ├ passwordService.ts
- │   └ analyticsService.ts
- │
- ├ types
- │   └ password
- │       ├ password.ts
- │       └ passwordForm.ts
- │
+src/
+├── features/
+│   ├── password/
+│
+├── shared/                  # Reusable code across features
+│   ├── components/
+│   ├── composables/
+│   └── services/
+│   └── types/
+│
+│
+└── main.(ts/js)             
  
 ```
 

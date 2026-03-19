@@ -52,7 +52,7 @@ async function handleSubmit(): Promise<void> {
     }
 }
 
-const returnToInitialView = () => {
+const returnToInitialView = (): void => {
     emit('returnToInitialView');
 };
 </script>

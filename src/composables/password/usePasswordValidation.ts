@@ -1,7 +1,10 @@
-import { computed } from 'vue';
+import { computed, type ComputedRef } from 'vue';
 import type { PasswordForm } from '@/types/password/passwordForm';
 
-export function usePasswordValidation(form: PasswordForm) {
+export function usePasswordValidation(form: PasswordForm): {
+    errors: ComputedRef<PasswordForm>;
+    isValid: ComputedRef<boolean>;
+} {
     const errors = computed(() => {
         const err: PasswordForm = {
             currentPassword: '',

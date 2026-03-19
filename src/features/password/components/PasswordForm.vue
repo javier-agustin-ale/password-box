@@ -18,6 +18,11 @@ const showPassword = reactive({
     new: false,
     confirm: false,
 });
+const inputTouched = reactive({
+    current: false,
+    new: false,
+    confirm: false,
+});
 
 const { errors, isValid } = usePasswordValidation(form);
 const { submitPassword, loading } = usePasswordChange();
@@ -70,9 +75,10 @@ const returnToInitialView = (): void => {
                     v-model="form.currentPassword"
                     name="currentPassword"
                     label="Current Password"
+                    @keydown="inputTouched.current = true"
                     :type="showPassword.current ? 'text' : 'password'"
                     placeholder="Current Password"
-                    :invalid="!!errors.currentPassword"
+                    :invalid="!!errors.currentPassword && inputTouched.current"
                 >
                     <template #append>
                         <button
@@ -93,7 +99,10 @@ const returnToInitialView = (): void => {
                         </button>
                     </template>
                 </DynInput>
-                <p v-if="errors.currentPassword" class="text-red-alert text-xs">
+                <p
+                    v-if="errors.currentPassword && inputTouched.current"
+                    class="text-red-alert text-xs"
+                >
                     {{ errors.currentPassword }}
                 </p>
             </div>
@@ -113,7 +122,8 @@ const returnToInitialView = (): void => {
                     :label="'New Password'"
                     :type="showPassword.new ? 'text' : 'password'"
                     placeholder="New Password"
-                    :invalid="!!errors.newPassword"
+                    :invalid="!!errors.newPassword && inputTouched.new"
+                    @keydown="inputTouched.new = true"
                 >
                     <template #append>
                         <button
@@ -132,7 +142,10 @@ const returnToInitialView = (): void => {
                         </button>
                     </template>
                 </DynInput>
-                <p v-if="errors.newPassword" class="text-red-alert text-xs">
+                <p
+                    v-if="errors.newPassword && inputTouched.new"
+                    class="text-red-alert text-xs"
+                >
                     {{ errors.newPassword }}
                 </p>
             </div>
@@ -144,7 +157,8 @@ const returnToInitialView = (): void => {
                     :label="'Confirm Password'"
                     :type="showPassword.confirm ? 'text' : 'password'"
                     placeholder="Confirm Password"
-                    :invalid="!!errors.confirmPassword"
+                    @keydown="inputTouched.confirm = true"
+                    :invalid="!!errors.confirmPassword && inputTouched.confirm"
                 >
                     <template #append>
                         <button
@@ -165,7 +179,10 @@ const returnToInitialView = (): void => {
                         </button>
                     </template>
                 </DynInput>
-                <p v-if="errors.confirmPassword" class="text-red-alert text-xs">
+                <p
+                    v-if="errors.confirmPassword && inputTouched.confirm"
+                    class="text-red-alert text-xs"
+                >
                     {{ errors.confirmPassword }}
                 </p>
             </div>

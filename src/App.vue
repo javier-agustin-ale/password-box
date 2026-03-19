@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PasswordBox from './components/password-box/PasswordBox.vue';
-import Toaster from './components/toaster/Toaster.vue';
+import PasswordBox from './features/password/components/PasswordBox.vue';
+import Toaster from './shared/components/toaster/Toaster.vue';
 </script>
 W
 <template>

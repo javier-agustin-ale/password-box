@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToaster } from '@/composables/toaster/useToaster';
+import { useToaster } from '@/shared/composables/toaster/useToaster';
 import MailingIcon from '@/assets/svg-assets/mailing.svg?component';
 
 const { toasts } = useToaster();

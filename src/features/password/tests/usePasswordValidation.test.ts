@@ -1,8 +1,7 @@
 import { reactive } from 'vue';
 import { describe, it, expect } from 'vitest';
-
-import { usePasswordValidation } from '@/composables/password/usePasswordValidation';
-import type { PasswordForm } from '@/types/password/passwordForm';
+import type { PasswordForm } from '../types/passwordForm';
+import { usePasswordValidation } from '../composables/usePasswordValidation';
 
 const createForm = (data?: Partial<PasswordForm>) =>
     reactive<PasswordForm>({

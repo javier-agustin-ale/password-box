@@ -52,10 +52,10 @@
 </template>
 
 <script lang="ts">
+import { useFocus } from '@/shared/composables/inputs/useInputFocus';
+import { useInputPasswordToggle } from '@/shared/composables/inputs/useInputPasswordToggle';
 import { computed, defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import { useFocus } from '../../composables/inputs/useInputFocus';
-import { useInputPasswordToggle } from '../../composables/inputs/useInputPasswordToggle';
 
 export default defineComponent({
     name: 'DynInput',
@@ -200,7 +200,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@reference "../../style.css";
+@reference "../../../style.css";
 
 label,
 input {

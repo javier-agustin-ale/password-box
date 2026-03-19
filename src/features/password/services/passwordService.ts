@@ -1,4 +1,4 @@
-import type { Password } from '@/types/password/password';
+import type { Password } from '../types/password';
 
 export async function changePassword(
     payload: Password,

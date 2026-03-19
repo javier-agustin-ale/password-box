@@ -1,7 +1,7 @@
 import { ref, type Ref } from 'vue';
-import { changePassword } from '@/services/passwordService';
-import type { Password } from '@/types/password/password';
-import { trackEvent } from '@/services/analyticsService';
+import { changePassword } from '@/features/password/services/passwordService';
+import { trackEvent } from '@/shared/services/analyticsService';
+import type { Password } from '../types/password';
 
 export function usePasswordChange(): {
     submitPassword: (payload: Password) => Promise<{ success: boolean }>;

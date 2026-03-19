@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { usePasswordChange } from '@/composables/password/usePasswordChange';
-import * as passwordService from '@/services/passwordService';
+import { usePasswordChange } from '../composables/usePasswordChange';
+import * as passwordService from '../services/passwordService';
 
 vi.mock('@/services/passwordService');
 

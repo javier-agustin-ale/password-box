@@ -1,4 +1,4 @@
-import type { Toast } from '@/types/toast/toast';
+import type { Toast } from '@/shared/types/toast/toast';
 import { ref, type Ref } from 'vue';
 
 const toasts = ref<Toast[]>([]);

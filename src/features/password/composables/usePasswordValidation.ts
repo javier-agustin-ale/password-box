@@ -1,5 +1,5 @@
 import { computed, type ComputedRef } from 'vue';
-import type { PasswordForm } from '@/types/password/passwordForm';
+import type { PasswordForm } from '../types/passwordForm';
 
 export function usePasswordValidation(form: PasswordForm): {
     errors: ComputedRef<PasswordForm>;

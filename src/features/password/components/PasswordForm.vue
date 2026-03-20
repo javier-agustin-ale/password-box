@@ -3,8 +3,8 @@ import { reactive, ref } from 'vue';
 import { usePasswordValidation } from '@/features/password/composables/usePasswordValidation';
 import { usePasswordChange } from '@/features/password/composables/usePasswordChange';
 import { useToaster } from '@/shared/composables/toaster/useToaster';
-import EyeIcon from '@/assets/svg-assets/eye.svg?component';
-import EyeClosedIcon from '@/assets/svg-assets/eye-closed.svg?component';
+import EyeIcon from '../../../assets/svg-assets/eye.svg?component';
+import EyeClosedIcon from '../../../assets/svg-assets/eye-closed.svg?component';
 import type { PasswordForm } from '../types/passwordForm';
 import DynInput from '@/shared/components/inputs/DynInput.vue';
 
